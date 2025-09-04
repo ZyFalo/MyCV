@@ -150,7 +150,90 @@ El proyecto está diseñado para ser fácilmente extensible:
 3. **Temas personalizados**: Modificar variables CSS
 4. **Funcionalidades adicionales**: Crear nuevas clases siguiendo el patrón existente
 
-## 📄 Licencia
+## � Despliegue en Railway
+
+### Configuración inicial
+
+#### 1. Preparar el repositorio
+```bash
+git add .
+git commit -m "Add Docker configuration for Railway"
+git push
+```
+
+#### 2. Configurar Railway
+
+1. Ve a [Railway](https://railway.app)
+2. Conecta tu cuenta de GitHub
+3. Selecciona "New Project" → "Deploy from GitHub repo"
+4. Selecciona tu repositorio `MyCV`
+5. Railway detectará automáticamente el Dockerfile
+
+#### 3. Variables de entorno (opcionales)
+```bash
+PORT=80
+NODE_ENV=production
+```
+
+### Desarrollo local con Docker
+
+#### Construir la imagen
+```bash
+docker build -t mycv-portfolio .
+```
+
+#### Ejecutar el contenedor
+```bash
+docker run -p 8080:80 mycv-portfolio
+```
+
+#### Acceder a la aplicación
+Abre tu navegador en `http://localhost:8080`
+
+### Comandos útiles
+
+#### Ver logs del contenedor
+```bash
+docker logs <container-id>
+```
+
+#### Ejecutar bash en el contenedor
+```bash
+docker exec -it <container-id> /bin/sh
+```
+
+#### Limpiar imágenes Docker
+```bash
+docker system prune -a
+```
+
+### Despliegue automático
+
+Cada push a la rama `main` desplegará automáticamente en Railway.
+
+#### Monitoreo
+- **Logs**: Railway Dashboard → Deployments → View Logs
+- **Métricas**: Railway Dashboard → Metrics
+- **Dominio**: Railway asignará un dominio automáticamente
+
+### Configuración de dominio personalizado
+
+1. En Railway Dashboard → Settings → Domains
+2. Agregar tu dominio personalizado
+3. Configurar DNS según las instrucciones de Railway
+
+### Troubleshooting
+
+#### Error de puerto
+Asegúrate que el contenedor expone el puerto 80 y Railway está configurado correctamente.
+
+#### Archivos estáticos no cargan
+Verifica la configuración de Nginx y las rutas de archivos.
+
+#### Build fallido
+Revisa los logs de build en Railway Dashboard.
+
+## �📄 Licencia
 
 Este proyecto es una plantilla base para CV online y puede ser utilizada libremente para fines personales y comerciales.
 
