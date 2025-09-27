@@ -343,13 +343,7 @@ main {
     transform: translateY(var(--indicator-top, 0px));
 }
 
-/* Elimina las reglas fijas previas */
-.skills-tabs[data-active="programming"]::before,
-.skills-tabs[data-active="frameworks"]::before,
-.skills-tabs[data-active="tools"]::before,
-.skills-tabs[data-active="soft"]::before {
-    /* No height ni transform aquí */
-}
+/* Elimina las reglas fijas previas - manejado dinámicamente por JS */
 
 /* Accesibilidad mejorada para tabs */
 .tab-button:focus {
@@ -738,5 +732,213 @@ main {
 
     .section-img img {
         height: 200px;
+    }
+}
+
+/* ===== ACHIEVEMENTS SECTION ===== */
+.achievements-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    gap: 2em;
+}
+
+.achievements-sidebar {
+    flex: 0 0 30%;
+    min-width: 250px;
+    position: relative;
+}
+
+.achievements-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    margin-bottom: 0;
+    position: relative;
+}
+
+/* Línea indicadora lateral para achievements */
+.achievements-tabs::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: rgba(46, 21, 86, 0.8);
+    border-radius: 2px;
+}
+
+.achievements-tabs::before {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: 0;
+    width: 5px;
+    background: #a78bfa;
+    border-radius: 3px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(167, 139, 250, 0.4);
+    height: 60px;
+}
+
+.achievements-tabs[data-indicator-pos]::before {
+    height: var(--indicator-height, 60px);
+    transform: translateY(var(--indicator-top, 0px));
+}
+
+.achievements-content-area {
+    flex: 1;
+}
+
+.achievements-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.achievement-item {
+    background: rgba(46, 21, 86, 0.3);
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    border-radius: 1em;
+    padding: 1.5em;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #a78bfa, #e0aaff);
+    transition: width 0.3s ease;
+}
+
+.achievement-item:hover {
+    background: rgba(46, 21, 86, 0.4);
+    border-color: rgba(167, 139, 250, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(167, 139, 250, 0.15);
+}
+
+.achievement-item:hover::before {
+    width: 6px;
+}
+
+.achievement-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+.achievement-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #a78bfa, #e0aaff);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    color: #140c24;
+    font-weight: bold;
+}
+
+.achievement-info {
+    flex: 1;
+}
+
+.achievement-title {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #e0aaff;
+    margin-bottom: 0.3em;
+    line-height: 1.3;
+}
+
+.achievement-period {
+    font-size: 0.9em;
+    color: #a78bfa;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.achievement-content {
+    padding-left: 0.5em;
+}
+
+.achievement-description {
+    font-size: 1em;
+    color: #d1d5db;
+    line-height: 1.6;
+    margin-bottom: 1em;
+    font-weight: 500;
+}
+
+.achievement-details {
+    font-size: 0.95em;
+    color: #9ca3af;
+    line-height: 1.6;
+    font-style: italic;
+    padding: 0.8em;
+    background: rgba(167, 139, 250, 0.05);
+    border-radius: 0.5em;
+    border-left: 3px solid #a78bfa;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3em 2em;
+    color: #9ca3af;
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+/* Responsive para achievements */
+@media (max-width: 768px) {
+    .achievements-container {
+        flex-direction: column;
+        gap: 1.5em;
+    }
+    
+    .achievements-sidebar {
+        flex: none;
+        min-width: unset;
+    }
+    
+    .achievements-tabs {
+        flex-direction: row;
+        gap: 0.5em;
+        overflow-x: auto;
+        padding-bottom: 0.5em;
+    }
+    
+    .achievements-tabs::after,
+    .achievements-tabs::before {
+        display: none;
+    }
+    
+    .achievement-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8em;
+    }
+    
+    .achievement-icon {
+        margin: 0 auto;
+    }
+    
+    .achievement-content {
+        padding-left: 0;
     }
 }

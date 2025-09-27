@@ -1,3 +1,22 @@
+// Configuración de datos para achievements
+const achievementsData = {
+    achievement: [
+        {
+            title: "100% Scholarship highest career GPA",
+            period: "JAN 2024 - JUN 2025",
+            icon: "✩",
+            description: "Recognition awarded for maintaining an outstanding grade point average during the fifth, sixth and seventh semester.",
+            details: "I was honored to be recognized as having the highest grade point average in the program across all semesters, which I attribute to consistent effort and a genuine commitment to my studies."
+        }
+    ],
+    tutoring: [
+        // Contenido pendiente
+    ],
+    certificates: [
+        // Contenido pendiente
+    ]
+};
+
 // Configuración de datos para skills (siguiendo principio DRY)
 const skillsData = {
     programming: [
@@ -27,6 +46,181 @@ const skillsData = {
         { name: 'Leadership', icon: '', percentage: 85 }
     ]
 };
+
+// Clase para manejar las tabs de achievements
+class AchievementsManager {
+    constructor() {
+        this.activeTab = 'achievement';
+        this.init();
+    }
+
+    init() {
+        const achievementsSection = document.getElementById('achievements');
+        if (achievementsSection) {
+            this.createAchievementsSection();
+            this.bindEvents();
+            this.showTab(this.activeTab);
+        }
+    }
+
+    createAchievementsSection() {
+        const achievementsSection = document.getElementById('achievements');
+        const sectionWrapper = achievementsSection.querySelector('.section-wrapper');
+        if (!sectionWrapper) return;
+
+        sectionWrapper.innerHTML = `
+            <h2 class="section-title">
+                <span style="font-size:1.2em; font-weight:bold;">/ achievements</span>
+                <span class="section-title-bar"></span>
+            </h2>
+            <div class="achievements-container">
+                <aside class="achievements-sidebar" role="tablist" aria-label="Achievements categories">
+                    <nav class="achievements-tabs" data-active="achievement">
+                        <button class="tab-button active" data-tab="achievement" role="tab" aria-selected="true" aria-controls="achievement-panel">
+                            Scholarships
+                        </button>
+                        <button class="tab-button" data-tab="tutoring" role="tab" aria-selected="false" aria-controls="tutoring-panel">
+                            Tutoring
+                        </button>
+                        <button class="tab-button" data-tab="certificates" role="tab" aria-selected="false" aria-controls="certificates-panel">
+                            Certificates
+                        </button>
+                    </nav>
+                </aside>
+                <main class="achievements-content-area">
+                    ${this.generateTabsContent()}
+                </main>
+            </div>
+        `;
+    }
+
+    generateTabsContent() {
+        return Object.keys(achievementsData).map(category => `
+            <section class="tab-content" data-tab="${category}" role="tabpanel" id="${category}-panel" aria-labelledby="${category}-tab">
+                <div class="achievements-grid">
+                    ${this.generateAchievementItems(category)}
+                </div>
+            </section>
+        `).join('');
+    }
+
+    generateAchievementItems(category) {
+        const items = achievementsData[category];
+        if (!items || items.length === 0) {
+            return `<div class="empty-state">Content coming soon...</div>`;
+        }
+        
+        return items.map(item => this.createAchievementItem(item)).join('');
+    }
+
+    createAchievementItem(achievement) {
+        return `
+            <div class="achievement-item">
+                <div class="achievement-header">
+                    <div class="achievement-icon">
+                        <span class="icon">${achievement.icon}</span>
+                    </div>
+                    <div class="achievement-info">
+                        <h3 class="achievement-title">${achievement.title}</h3>
+                        <span class="achievement-period">${achievement.period}</span>
+                    </div>
+                </div>
+                <div class="achievement-content">
+                    <p class="achievement-description">${achievement.description}</p>
+                    ${achievement.details ? `<p class="achievement-details">${achievement.details}</p>` : ''}
+                </div>
+            </div>
+        `;
+    }
+
+    bindEvents() {
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.achievements-container') && e.target.classList.contains('tab-button')) {
+                const tab = e.target.dataset.tab;
+                this.showTab(tab);
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.target.closest('.achievements-container') && e.target.classList.contains('tab-button')) {
+                const tabs = Array.from(document.querySelectorAll('.achievements-container .tab-button'));
+                const currentIndex = tabs.indexOf(e.target);
+                
+                let newIndex;
+                if (e.key === 'ArrowRight') {
+                    newIndex = (currentIndex + 1) % tabs.length;
+                } else if (e.key === 'ArrowLeft') {
+                    newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+                } else {
+                    return;
+                }
+                
+                e.preventDefault();
+                tabs[newIndex].focus();
+                this.showTab(tabs[newIndex].dataset.tab);
+            }
+        });
+    }
+
+    showTab(tabName) {
+        const achievementsContainer = document.querySelector('.achievements-container');
+        if (!achievementsContainer) return;
+
+        // Actualizar indicador lateral
+        const achievementsTabs = achievementsContainer.querySelector('.achievements-tabs');
+        if (achievementsTabs) {
+            achievementsTabs.setAttribute('data-active', tabName);
+            const activeBtn = achievementsTabs.querySelector(`.tab-button[data-tab="${tabName}"]`);
+            if (activeBtn) {
+                const top = activeBtn.offsetTop - achievementsTabs.offsetTop;
+                const height = activeBtn.offsetHeight;
+                achievementsTabs.style.setProperty('--indicator-top', `${top}px`);
+                achievementsTabs.style.setProperty('--indicator-height', `${height}px`);
+                achievementsTabs.setAttribute('data-indicator-pos', 'true');
+            }
+        }
+        
+        // Actualizar botones activos
+        achievementsContainer.querySelectorAll('.tab-button').forEach(btn => {
+            const isActive = btn.dataset.tab === tabName;
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-selected', isActive);
+        });
+
+        // Ocultar contenido actual
+        const currentActive = achievementsContainer.querySelector('.tab-content.active');
+        if (currentActive && currentActive.dataset.tab !== tabName) {
+            currentActive.style.opacity = '0';
+            currentActive.style.transform = 'translateX(-20px)';
+            
+            setTimeout(() => {
+                currentActive.classList.remove('active');
+                this.showNewContent(tabName);
+            }, 200);
+        } else {
+            this.showNewContent(tabName);
+        }
+
+        this.activeTab = tabName;
+    }
+
+    showNewContent(tabName) {
+        const achievementsContainer = document.querySelector('.achievements-container');
+        const newContent = achievementsContainer.querySelector(`.tab-content[data-tab="${tabName}"]`);
+        if (newContent) {
+            newContent.style.opacity = '0';
+            newContent.style.transform = 'translateX(20px)';
+            newContent.classList.add('active');
+            
+            newContent.offsetHeight;
+            
+            setTimeout(() => {
+                newContent.style.opacity = '1';
+                newContent.style.transform = 'translateX(0)';
+            }, 50);
+        }
+    }
+}
 
 // Clase para manejar las tabs de skills
 class SkillsManager {
