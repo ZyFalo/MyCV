@@ -10,10 +10,65 @@ const achievementsData = {
         }
     ],
     tutoring: [
-        // Contenido pendiente
+        {
+            title: "Basic Sciences Tutoring Program",
+            period: "JAN 2024 - DEC 2024",
+            icon: "📚",
+            description: "Provided comprehensive tutoring in basic sciences subjects to students across multiple university programs including Physiotherapy, Speech-Language Pathology, and Environmental Engineering.",
+            details: "Throughout 2024, I had the privilege of supporting fellow students in mastering fundamental science concepts, adapting my teaching approach to diverse academic backgrounds and learning styles.",
+            certificate: {
+                title: "University Tutoring Certificate",
+                url: "#",
+                description: "Official certificate recognizing tutoring contributions to the university community"
+            }
+        }
     ],
     certificates: [
-        // Contenido pendiente
+        {
+            title: "Google Cloud Computing Foundations Certificate",
+            institution: "Google",
+            year: "2024",
+            duration: "40 hours",
+            type: "Online",
+            icon: "☁",
+            description: "Comprehensive certification covering cloud computing fundamentals and Google Cloud Platform services, including compute, storage, networking, and security essentials."
+        },
+        {
+            title: "Introducción a la Seguridad Cibernética",
+            institution: "Cisco Networking Academy",
+            year: "2024",
+            duration: "20 hours",
+            type: "Online",
+            icon: "🔒",
+            description: "Foundational cybersecurity course covering threat landscape, attack vectors, security frameworks, and defense strategies for modern digital environments."
+        },
+        {
+            title: "Python Essentials 1",
+            institution: "Cisco Networking Academy",
+            year: "2023",
+            duration: "30 hours",
+            type: "Online",
+            icon: "🐍",
+            description: "Comprehensive Python programming fundamentals including syntax, data structures, control flow, functions, and object-oriented programming concepts."
+        },
+        {
+            title: "CCNAv7: Switching, Routing, and Wireless Essentials",
+            institution: "Cisco Networking Academy",
+            year: "2024",
+            duration: "40 hours",
+            type: "Online",
+            icon: "🌐",
+            description: "Advanced networking concepts covering switching technologies, VLAN configuration, routing protocols, wireless infrastructure, and network troubleshooting."
+        },
+        {
+            title: "Microsoft Azure Fundamentals",
+            institution: "Microsoft Learn",
+            year: "2024",
+            duration: "3 hours",
+            type: "Online",
+            icon: "☁",
+            description: "Azure cloud platform fundamentals including architecture overview, core services, security features, and pricing models for cloud solutions."
+        }
     ]
 };
 
@@ -46,6 +101,94 @@ const skillsData = {
         { name: 'Leadership', icon: '', percentage: 85 }
     ]
 };
+
+// Configuración de datos para projects
+const projectsData = [
+    {
+        title: "ActividadTricky",
+        description: "Interactive web application designed to enhance learning through gamified educational activities and challenges.",
+        technologies: ["HTML", "CSS", "JavaScript", "Web APIs"],
+        github: "https://github.com/CatalinaQuij/ActividadTricky",
+        image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=500&h=300&fit=crop",
+        category: "Web Development"
+    },
+    {
+        title: "MamoCheck",
+        description: "Health-focused application for breast cancer awareness and early detection support, promoting women's health education.",
+        technologies: ["Mobile Development", "Healthcare", "UI/UX"],
+        github: "https://github.com/CatalinaQuij/MamoCheck",
+        image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=300&fit=crop",
+        category: "Healthcare"
+    },
+    {
+        title: "BookMatch",
+        description: "Intelligent book recommendation system that helps users discover new literature based on their reading preferences and history.",
+        technologies: ["Python", "Machine Learning", "Recommendation Systems"],
+        github: "https://github.com/ZyFalo/BookMatch",
+        image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=500&h=300&fit=crop",
+        category: "Machine Learning"
+    }
+];
+
+// Clase para manejar la sección de proyectos
+class ProjectsManager {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        const projectsSection = document.getElementById('projects');
+        if (projectsSection) {
+            this.createProjectsSection();
+        }
+    }
+
+    createProjectsSection() {
+        const projectsSection = document.getElementById('projects');
+        const sectionWrapper = projectsSection.querySelector('.section-wrapper');
+        if (!sectionWrapper) return;
+
+        sectionWrapper.innerHTML = `
+            <h2 class="section-title">
+                <span style="font-size:1.2em; font-weight:bold;">/ projects</span>
+                <span class="section-title-bar"></span>
+            </h2>
+            <div class="projects-container">
+                <div class="projects-grid">
+                    ${projectsData.map(project => this.createProjectCard(project)).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    createProjectCard(project) {
+        return `
+            <div class="project-card" data-category="${project.category}">
+                <div class="project-image">
+                    <img src="${project.image}" alt="${project.title}" loading="lazy">
+                    <div class="project-overlay">
+                        <div class="project-category">${project.category}</div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">${project.title}</h3>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-technologies">
+                        ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                    </div>
+                    <div class="project-actions">
+                        <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="project-github-btn">
+                            <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            <span>View on GitHub</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
 
 // Clase para manejar las tabs de achievements
 class AchievementsManager {
@@ -114,6 +257,32 @@ class AchievementsManager {
     }
 
     createAchievementItem(achievement) {
+        // Para certificados técnicos
+        if (achievement.institution) {
+            return `
+                <div class="achievement-item certificate-item">
+                    <div class="achievement-header">
+                        <div class="achievement-icon">
+                            <span class="icon">${achievement.icon}</span>
+                        </div>
+                        <div class="achievement-info">
+                            <h3 class="achievement-title">${achievement.title}</h3>
+                            <span class="achievement-institution">${achievement.institution}</span>
+                            <div class="certificate-meta">
+                                <span class="achievement-year">${achievement.year}</span>
+                                <span class="achievement-duration">${achievement.duration}</span>
+                                <span class="achievement-type">${achievement.type}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="achievement-content">
+                        <p class="achievement-description">${achievement.description}</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Para achievements y tutoring
         return `
             <div class="achievement-item">
                 <div class="achievement-header">
@@ -128,6 +297,15 @@ class AchievementsManager {
                 <div class="achievement-content">
                     <p class="achievement-description">${achievement.description}</p>
                     ${achievement.details ? `<p class="achievement-details">${achievement.details}</p>` : ''}
+                    ${achievement.certificate ? `
+                        <div class="certificate-preview">
+                            <button class="certificate-btn" onclick="previewCertificate('${achievement.certificate.url}', '${achievement.certificate.title}')">
+                                <span class="cert-icon">📜</span>
+                                <span class="cert-text">View Certificate</span>
+                            </button>
+                            <span class="cert-description">${achievement.certificate.description}</span>
+                        </div>
+                    ` : ''}
                 </div>
             </div>
         `;
@@ -599,6 +777,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.skillsManager = new SkillsManager();
     //Inicializar Achievements Manager
     window.achievementsManager = new AchievementsManager();
+    // Inicializar Projects Manager
+    window.projectsManager = new ProjectsManager();
 
     // Inicializar Menu Manager (usar fallback si menu.js no está disponible)
     if (typeof MenuManager === 'undefined') {
@@ -646,6 +826,33 @@ window.updateSkillPercentage = function(category, skillName, newPercentage) {
     if (window.skillsManager) {
         window.skillsManager.updateSkillPercentage(category, skillName, newPercentage);
     }
+};
+
+// Función global para previsualizar certificados
+window.previewCertificate = function(url, title) {
+    // Por ahora mostrar un modal simple, se puede expandir para mostrar PDFs
+    const modal = document.createElement('div');
+    modal.className = 'certificate-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>${title}</h3>
+                <button class="modal-close" onclick="this.parentElement.parentElement.parentElement.remove()">×</button>
+            </div>
+            <div class="modal-body">
+                <p>Certificate preview will be available soon.</p>
+                <p><strong>Document:</strong> ${title}</p>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    // Cerrar modal al hacer click fuera
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
 };
 
 // Agregar CSS para la animación de fade in
