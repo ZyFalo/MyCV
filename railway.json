@@ -1,3 +1,11 @@
 {
-	"dockerfilePath": "Dockerfile"
+	"build": {
+		"builder": "dockerfile",
+		"dockerfilePath": "Dockerfile"
+	},
+	"deploy": {
+		"numReplicas": 1,
+		"restartPolicyType": "on-failure",
+		"restartPolicyMaxRetries": 3
+	}
 }
