@@ -18,6 +18,7 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# For production, set SECRET_KEY as an environment variable in Railway
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-=vlel4u+x@1dv@+a@3sna72g$sb6_qfd-a%dsvr#ay48_2#l+u')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -156,8 +157,12 @@ if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
-    # Disable SSL redirect for Railway initial testing
-    # SECURE_SSL_REDIRECT = True
-    # SECURE_HSTS_SECONDS = 31536000
-    # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    # SECURE_HSTS_PRELOAD = True
+    
+    # Security settings for production (uncomment when ready for full security)
+    if os.environ.get('RAILWAY_ENVIRONMENT') or os.environ.get('ENABLE_SSL', 'False').lower() == 'true':
+        SECURE_SSL_REDIRECT = True
+        SECURE_HSTS_SECONDS = 31536000
+        SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+        SECURE_HSTS_PRELOAD = True
+        SESSION_COOKIE_SECURE = True
+        CSRF_COOKIE_SECURE = True
