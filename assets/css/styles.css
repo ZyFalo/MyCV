@@ -887,7 +887,6 @@ main {
 
 .achievement-callout {
     margin-top: 1em;
-    position: relative;
 }
 
 .achievement-details {
@@ -895,23 +894,11 @@ main {
     color: #d1d5db;
     line-height: 1.6;
     font-style: italic;
-    padding: 1.2em 1.5em;
-    background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(224, 170, 255, 0.05));
-    border-radius: 1em;
-    border: 1px solid rgba(167, 139, 250, 0.2);
-    position: relative;
+    padding: 1em 1.2em;
+    background: rgba(167, 139, 250, 0.08);
+    border-radius: 0.8em;
+    border-left: 3px solid #a78bfa;
     margin: 0;
-}
-
-.achievement-details::before {
-    content: '💭';
-    position: absolute;
-    top: -8px;
-    left: 20px;
-    background: #2e1556;
-    padding: 0.2em 0.5em;
-    border-radius: 50%;
-    font-size: 1em;
 }
 
 .empty-state {
@@ -1430,6 +1417,40 @@ main {
     background: rgba(167, 139, 250, 0.2);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(167, 139, 250, 0.2);
+}
+
+.comrade-actions {
+    margin-top: 1.5em;
+    display: flex;
+    justify-content: center;
+}
+
+.comrade-website-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    background: linear-gradient(135deg, #a78bfa, #e0aaff);
+    color: #140c24;
+    text-decoration: none;
+    padding: 0.8em 1.5em;
+    border-radius: 0.8em;
+    font-weight: 600;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.comrade-website-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(167, 139, 250, 0.3);
+    text-decoration: none;
+    color: #140c24;
+}
+
+.website-icon {
+    width: 18px;
+    height: 18px;
 }
 
 /* Responsive para comrades */

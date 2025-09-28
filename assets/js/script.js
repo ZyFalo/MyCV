@@ -134,24 +134,27 @@ const projectsData = [
 const comradesData = [
     {
         name: "William Peña",
-        description: "An awesome full stack developer that have been working with me along this year (he secretly pretends working on backend and relational databases).",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+        description: "An awesome full stack developer that have been working with me along this year (he secretly prefers working on backend and relational databases).",
+        image: "assets/images/comrades/will.jpg",
         role: "Full Stack Developer",
-        specialties: ["Backend", "Databases", "Full Stack"]
+        specialties: ["Backend", "Databases", "Full Stack"],
+        website: "https://willpena.dev"
     },
     {
         name: "Mariam Gutierrez",
         description: "A quick learner and gamer, she is interested in data science and related projects, my dearest friend and colleague.",
-        image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
+        image: "assets/images/comrades/mar.jpg",
         role: "Data Science Enthusiast",
-        specialties: ["Data Science", "Gaming", "Machine Learning"]
+        specialties: ["Data Science", "Gaming", "Machine Learning"],
+        website: "https://mariamgutierrez.dev"
     },
     {
         name: "Sebastián Araque",
         description: "Web developer with a passion for creating innovative user experiences and modern web applications. Always up for a challenge and loves exploring new technologies.",
-        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
+        image: "assets/images/comrades/araque.jpeg",
         role: "Web Developer",
-        specialties: ["Frontend", "UI/UX", "Modern Web"]
+        specialties: ["Frontend", "UI/UX", "Modern Web"],
+        website: "https://sebastianaraque.dev"
     }
 ];
 
@@ -175,7 +178,7 @@ class ComradesManager {
 
         sectionWrapper.innerHTML = `
             <h2 class="section-title">
-                <span style="font-size:1.2em; font-weight:bold;">/ my dear comrades! ❤️</span>
+                <span style="font-size:1.2em; font-weight:bold;">/ my dear comrades! ♡</span>
                 <span class="section-title-bar"></span>
             </h2>
             <div class="comrades-container">
@@ -202,6 +205,14 @@ class ComradesManager {
                     <p class="comrade-description">${comrade.description}</p>
                     <div class="comrade-specialties">
                         ${comrade.specialties.map(specialty => `<span class="specialty-tag">${specialty}</span>`).join('')}
+                    </div>
+                    <div class="comrade-actions">
+                        <a href="${comrade.website}" target="_blank" rel="noopener noreferrer" class="comrade-website-btn">
+                            <svg class="website-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                            </svg>
+                            <span>Visit Site</span>
+                        </a>
                     </div>
                 </div>
             </div>
