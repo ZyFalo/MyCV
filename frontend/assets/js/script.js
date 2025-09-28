@@ -15,7 +15,7 @@ const achievementsData = {
         {
             title: "Basic Sciences Tutoring Program",
             period: "JAN 2024 - DEC 2024",
-            icon: "⌨️",
+            icon: "✩",
             description: "Provided comprehensive tutoring in basic sciences subjects to students across multiple university programs including Physiotherapy, Speech-Language Pathology, and Environmental Engineering.",
             details: "Throughout 2024, I had the privilege of supporting fellow students in mastering fundamental science concepts, adapting my teaching approach to diverse academic backgrounds and learning styles.",
             certificate: {
@@ -32,7 +32,7 @@ const achievementsData = {
             year: "2024",
             duration: "40 hours",
             type: "Online",
-            icon: "⌨️",
+            icon: "✩",
             description: "Comprehensive certification covering cloud computing fundamentals and Google Cloud Platform services, including compute, storage, networking, and security essentials."
         },
         {
@@ -41,7 +41,7 @@ const achievementsData = {
             year: "2024",
             duration: "20 hours",
             type: "Online",
-            icon: "⌨️",
+            icon: "✩",
             description: "Foundational cybersecurity course covering threat landscape, attack vectors, security frameworks, and defense strategies for modern digital environments."
         },
         {
@@ -50,7 +50,7 @@ const achievementsData = {
             year: "2023",
             duration: "30 hours",
             type: "Online",
-            icon: "⌨️",
+            icon: "✩",
             description: "Comprehensive Python programming fundamentals including syntax, data structures, control flow, functions, and object-oriented programming concepts."
         },
         {
@@ -59,7 +59,7 @@ const achievementsData = {
             year: "2024",
             duration: "40 hours",
             type: "Online",
-            icon: "⌨️",
+            icon: "✩",
             description: "Advanced networking concepts covering switching technologies, VLAN configuration, routing protocols, wireless infrastructure, and network troubleshooting."
         },
         {
@@ -68,7 +68,7 @@ const achievementsData = {
             year: "2024",
             duration: "3 hours",
             type: "Online",
-            icon: "⌨️",
+            icon: "✩",
             description: "Azure cloud platform fundamentals including architecture overview, core services, security features, and pricing models for cloud solutions."
         }
     ]

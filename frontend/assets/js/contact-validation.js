@@ -8,40 +8,40 @@ class ContactValidator {
                 minLength: 2,
                 maxLength: 100,
                 pattern: /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s]+$/,
-                message: 'El nombre debe contener solo letras y espacios (mín. 2 caracteres)'
+                message: 'Name must contain only letters and spaces (min. 2 characters)'
             },
             email: {
                 required: true,
                 pattern: /^[a-zA-Z0-9]([a-zA-Z0-9._-])*[a-zA-Z0-9]@[a-zA-Z0-9]([a-zA-Z0-9-])*[a-zA-Z0-9]\.([a-zA-Z]{2,})+$/,
                 maxLength: 254,
-                message: 'Ingresa un correo electrónico válido'
+                message: 'Please enter a valid email address'
             },
             empresa: {
                 required: false,
                 maxLength: 100,
                 pattern: /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s\d\.\-&,]+$/,
-                message: 'Nombre de empresa no válido'
+                message: 'Invalid company name'
             },
             telefono: {
                 required: false,
                 pattern: /^(\+57\s?)?(3[0-9]{2}|[67][0-9]{2})\s?[0-9]{3}\s?[0-9]{4}$/,
                 minLength: 10,
                 maxLength: 17,
-                message: 'Formato de teléfono colombiano no válido (ej: +57 300 123 4567 o 3001234567)'
+                message: 'Invalid Colombian phone format (e.g. +57 300 123 4567)'
             },
             tipo_proyecto: {
                 required: true,
-                message: 'Selecciona el tipo de proyecto'
+                message: 'Please select a project type'
             },
             mensaje: {
                 required: true,
                 minLength: 10,
                 maxLength: 1000,
-                message: 'El mensaje debe tener entre 10 y 1000 caracteres'
+                message: 'Message must be between 10 and 1000 characters'
             },
             terminos: {
                 required: true,
-                message: 'Debes aceptar los términos y condiciones'
+                message: 'You must accept the terms and conditions'
             }
         };
         
@@ -114,39 +114,39 @@ class ContactValidator {
         let isValid = true;
         let errorMessage = '';
 
-        // Validar campo requerido
+        // Required
         if (rule.required && !value) {
             isValid = false;
-            errorMessage = 'Este campo es requerido';
+            errorMessage = 'This field is required';
         }
-        // Validar longitud mínima
+        // Min length
         else if (rule.minLength && value.length < rule.minLength) {
             isValid = false;
-            errorMessage = rule.message || `Mínimo ${rule.minLength} caracteres`;
+            errorMessage = rule.message || `Minimum ${rule.minLength} characters`;
         }
-        // Validar longitud máxima
+        // Max length
         else if (rule.maxLength && value.length > rule.maxLength) {
             isValid = false;
-            errorMessage = `Máximo ${rule.maxLength} caracteres`;
+            errorMessage = `Maximum ${rule.maxLength} characters`;
         }
-        // Validar patrón
+        // Pattern
         else if (rule.pattern && value && !rule.pattern.test(value)) {
             isValid = false;
-            errorMessage = rule.message || 'Formato no válido';
+            errorMessage = rule.message || 'Invalid format';
         }
         
-        // Validaciones especiales
+        // Special validations
         if (fieldName === 'email' && value) {
             isValid = this.validateEmail(value);
             if (!isValid) {
-                errorMessage = 'Correo electrónico no válido';
+                errorMessage = 'Invalid email address';
             }
         }
         
         if (fieldName === 'telefono' && value) {
             isValid = this.validateColombianPhone(value);
             if (!isValid) {
-                errorMessage = 'Número de teléfono colombiano no válido';
+                errorMessage = 'Invalid Colombian phone number';
             }
         }
         
@@ -162,15 +162,13 @@ class ContactValidator {
     }
 
     validateEmail(email) {
-        // Regex más robusto para email
+        // Robust email regex
         const emailRegex = /^[a-zA-Z0-9]([a-zA-Z0-9._-])*[a-zA-Z0-9]@[a-zA-Z0-9]([a-zA-Z0-9-])*[a-zA-Z0-9]\.([a-zA-Z]{2,})+$/;
         
         if (!emailRegex.test(email)) return false;
         
-        // Verificar que no tenga puntos consecutivos
         if (email.includes('..')) return false;
         
-        // Verificar que no empiece o termine con punto o guión
         const localPart = email.split('@')[0];
         const domain = email.split('@')[1];
         
@@ -180,7 +178,6 @@ class ContactValidator {
         if (domain.startsWith('.') || domain.endsWith('.') || 
             domain.startsWith('-') || domain.endsWith('-')) return false;
         
-        // Verificar dominios comunes sospechosos
         const suspiciousDomains = ['tempmail', '10minutemail', 'guerrillamail', 'mailinator'];
         
         if (suspiciousDomains.some(suspicious => domain?.toLowerCase().includes(suspicious))) {
@@ -341,7 +338,7 @@ class ContactValidator {
             if (!recaptchaResponse) {
                 isFormValid = false;
                 errors.push('recaptcha');
-                this.showRecaptchaError('Por favor, completa la verificación reCAPTCHA');
+                this.showRecaptchaError('Please complete the reCAPTCHA verification');
             }
         }
 

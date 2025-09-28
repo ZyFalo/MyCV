@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <!-- Google Tag Manager -->
@@ -15,8 +15,8 @@
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contáctame - Cata's Portfolio</title>
-    <meta name="description" content="Ponte en contacto conmigo. Formulario de contacto para proyectos, colaboraciones y oportunidades profesionales.">
+    <title>Contact Me - Cata's Portfolio</title>
+    <meta name="description" content="Get in touch with me. Contact form for projects, collaborations and professional opportunities.">
     <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/png">
     
     <!-- Google Fonts -->
@@ -26,6 +26,8 @@
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/contact.css' %}">
+    <!-- Remix Icon (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 
 <body>
@@ -45,20 +47,20 @@
 
     <header>
         <div class="logo">
-            <a href="index.html">
+            <a href="/">
                 <img src="{% static 'assets/images/icon.png' %}" alt="Cata's portfolio">
                 Cata
             </a>
         </div>
         <nav aria-label="Main navigation">
             <ul id="nav-list">
-                <li><a href="index.html#home">home</a></li>
-                <li><a href="index.html#about">about</a></li>
-                <li><a href="index.html#skills">skills</a></li>
-                <li><a href="index.html#achievements">achievements</a></li>
-                <li><a href="index.html#projects">projects</a></li>
-                <li><a href="index.html#comrades">comrades</a></li>
-                <li><a href="contactame.html" class="active">contacto</a></li>
+                <li><a href="/#home">home</a></li>
+                <li><a href="/#about">about</a></li>
+                <li><a href="/#skills">skills</a></li>
+                <li><a href="/#achievements">achievements</a></li>
+                <li><a href="/#projects">projects</a></li>
+                <li><a href="/#comrades">comrades</a></li>
+                <li><a href="/contactame.html" class="active">contact</a></li>
             </ul>
         </nav>
         <div class="header-icons">
@@ -85,31 +87,31 @@
             <div class="contact-container">
                 <div class="contact-header">
                     <h1 class="contact-title">
-                        <span class="highlight">¡Contáctame!</span> 
+                        <span class="highlight">Contact Me!</span>
                     </h1>
                     <p class="contact-description">
-                        ¿Tienes un proyecto en mente? ¿Quieres colaborar? ¡Me encantaría saber de ti!
-                        Completa el formulario y me pondré en contacto contigo lo antes posible.
+                        Have a project in mind? Want to collaborate? I'd love to hear from you!
+                        Fill out the form and I will get back to you as soon as possible.
                     </p>
                 </div>
 
                 <div class="contact-content">
                     <div class="contact-info">
                         <div class="info-card">
-                            <div class="info-icon">📧</div>
+                            <div class="info-icon" aria-hidden="true"><i class="ri-mail-line"></i></div>
                             <h3>Email</h3>
                             <p>catalinaquijano.al@gmail.com</p>
                         </div>
                         
                         <div class="info-card">
-                            <div class="info-icon">📱</div>
-                            <h3>Respuesta</h3>
-                            <p>24-48 horas</p>
+                            <div class="info-icon" aria-hidden="true"><i class="ri-phone-line"></i></div>
+                            <h3>Response time</h3>
+                            <p>24–48 hours</p>
                         </div>
                         
                         <div class="info-card">
-                            <div class="info-icon">🌍</div>
-                            <h3>Ubicación</h3>
+                            <div class="info-icon" aria-hidden="true"><i class="ri-earth-line"></i></div>
+                            <h3>Location</h3>
                             <p>Bogotá, Colombia</p>
                         </div>
                     </div>
@@ -119,7 +121,7 @@
                         <input type="hidden" id="csrfToken" name="csrfmiddlewaretoken" value="">
                         
                         <div class="form-group">
-                            <label for="nombre" class="form-label">Nombre completo *</label>
+                            <label for="nombre" class="form-label">Full name *</label>
                             <input 
                                 type="text" 
                                 id="nombre" 
@@ -135,7 +137,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="form-label">Correo electrónico *</label>
+                            <label for="email" class="form-label">Email address *</label>
                             <input 
                                 type="email" 
                                 id="email" 
@@ -150,7 +152,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="empresa" class="form-label">Empresa/Organización</label>
+                            <label for="empresa" class="form-label">Company / Organization</label>
                             <input 
                                 type="text" 
                                 id="empresa" 
@@ -162,7 +164,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="telefono" class="form-label">Teléfono</label>
+                            <label for="telefono" class="form-label">Phone</label>
                             <input 
                                 type="tel" 
                                 id="telefono" 
@@ -177,7 +179,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="tipo_proyecto" class="form-label">Tipo de proyecto *</label>
+                            <label for="tipo_proyecto" class="form-label">Project type *</label>
                             <select 
                                 id="tipo_proyecto" 
                                 name="tipo_proyecto" 
@@ -185,31 +187,31 @@
                                 required
                                 aria-describedby="tipo_proyecto-error"
                             >
-                                <option value="">Selecciona una opción</option>
-                                <option value="desarrollo_web">Desarrollo Web</option>
-                                <option value="aplicacion_movil">Aplicación Móvil</option>
-                                <option value="consultoria">Consultoría Técnica</option>
-                                <option value="colaboracion">Colaboración</option>
-                                <option value="oportunidad_laboral">Oportunidad Laboral</option>
-                                <option value="otro">Otro</option>
+                                <option value="">Select an option</option>
+                                <option value="desarrollo_web">Web Development</option>
+                                <option value="aplicacion_movil">Mobile App</option>
+                                <option value="consultoria">Technical Consulting</option>
+                                <option value="colaboracion">Collaboration</option>
+                                <option value="oportunidad_laboral">Job Opportunity</option>
+                                <option value="otro">Other</option>
                             </select>
                             <div class="error-message" id="tipo_proyecto-error" role="alert"></div>
                         </div>
 
                         <div class="form-group">
-                            <label for="presupuesto" class="form-label">Presupuesto estimado</label>
+                            <label for="presupuesto" class="form-label">Estimated budget</label>
                             <select id="presupuesto" name="presupuesto" class="form-select">
-                                <option value="">Selecciona un rango</option>
-                                <option value="menos_1000">Menos de $1,000 USD</option>
-                                <option value="1000_5000">$1,000 - $5,000 USD</option>
-                                <option value="5000_10000">$5,000 - $10,000 USD</option>
-                                <option value="10000_mas">Más de $10,000 USD</option>
-                                <option value="por_definir">Por definir</option>
+                                <option value="">Select a range</option>
+                                <option value="menos_1000">Under $1,000 USD</option>
+                                <option value="1000_5000">$1,000 – $5,000 USD</option>
+                                <option value="5000_10000">$5,000 – $10,000 USD</option>
+                                <option value="10000_mas">Over $10,000 USD</option>
+                                <option value="por_definir">To be defined</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="mensaje" class="form-label">Mensaje *</label>
+                            <label for="mensaje" class="form-label">Message *</label>
                             <textarea 
                                 id="mensaje" 
                                 name="mensaje" 
@@ -218,7 +220,7 @@
                                 minlength="10" 
                                 maxlength="1000" 
                                 rows="5"
-                                placeholder="Cuéntame sobre tu proyecto, ideas, o cualquier pregunta que tengas..."
+                                placeholder="Tell me about your project, ideas, or any questions..."
                                 aria-describedby="mensaje-error mensaje-counter"
                             ></textarea>
                             <div class="textarea-footer">
@@ -228,14 +230,8 @@
                         </div>
 
                         <!-- reCAPTCHA -->
-                        <div class="form-group">
-                            <div class="recaptcha-container">
-                                <div id="recaptcha" class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
-                                <div class="error-message" id="recaptcha-error" role="alert"></div>
-                            </div>
-                        </div>
 
-                        <!-- Términos y condiciones -->
+                        <!-- Terms and privacy -->
                         <div class="form-group">
                             <label class="checkbox-container">
                                 <input 
@@ -246,14 +242,14 @@
                                     aria-describedby="terminos-error"
                                 >
                                 <span class="checkmark"></span>
-                                Acepto los <a href="#" target="_blank">términos y condiciones</a> y la <a href="#" target="_blank">política de privacidad</a> *
+                                I accept the <a href="#" target="_blank">terms and conditions</a> and the <a href="#" target="_blank">privacy policy</a> *
                             </label>
                             <div class="error-message" id="terminos-error" role="alert"></div>
                         </div>
 
                         <div class="form-actions">
                             <button type="submit" class="submit-btn" id="submitBtn">
-                                <span class="btn-text">Enviar mensaje</span>
+                                <span class="btn-text">Send message</span>
                                 <span class="btn-loading" style="display: none;">
                                     <svg class="spinner" viewBox="0 0 24 24">
                                         <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="31.416" stroke-dashoffset="31.416">
@@ -261,7 +257,7 @@
                                             <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/>
                                         </circle>
                                     </svg>
-                                    Enviando...
+                                    Sending...
                                 </span>
                             </button>
                         </div>
@@ -281,7 +277,7 @@
                     <p id="modalMessage"></p>
                 </div>
                 <div class="modal-footer">
-                    <button class="modal-btn" onclick="closeModal()">Cerrar</button>
+                    <button class="modal-btn" onclick="closeModal()">Close</button>
                 </div>
             </div>
         </div>

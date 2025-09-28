@@ -509,3 +509,8 @@ Este proyecto está bajo la Licencia MIT. Puedes usar, modificar y distribuir li
 **¡Portfolio Full Stack listo para producción! 🚀**
 
 *Desarrollado con ❤️ por Catalina Quijano*
+
+## ⚙️ Notas sobre archivos estáticos
+- Django recopila los assets estáticos (CSS, JS, imágenes) desde STATICFILES_DIRS y los copia a STATIC_ROOT cuando se ejecuta `python manage.py collectstatic`.
+- En este proyecto STATIC_ROOT por defecto es backend/staticfiles. Esa carpeta es generada y NO debe comitearse en el repositorio.
+- Puedes borrar backend/staticfiles si la ves en tu repo; se recreará al ejecutar collectstatic en el entorno de despliegue. Añadimos `/backend/staticfiles` a .dockerignore para evitar incluirla en el contexto de build de Docker.

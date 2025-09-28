@@ -134,9 +134,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # collectstatic copia aquí; NO comitees esta carpeta
+# Antes: STATICFILES_DIRS apuntaba a toda la carpeta frontend. Es preferible apuntar solo a los assets estáticos
 STATICFILES_DIRS = [
-    BASE_DIR.parent / 'frontend'  # apunta a tu carpeta frontend con index.html y assets/
+    BASE_DIR.parent / 'frontend' / 'assets'  # solo css/js/images en frontend/assets/
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
