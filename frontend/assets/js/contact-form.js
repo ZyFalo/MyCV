@@ -36,7 +36,7 @@ class ContactFormHandler {
         }
     }
 
-    async handleSubmit(event) {
+async handleSubmit(event) {
         event.preventDefault();
         
         if (this.isSubmitting) return;
@@ -70,16 +70,14 @@ class ContactFormHandler {
             return;
         }
 
-        // Iniciar envío
+        // RECOPILAR Y SANITIZAR DATOS ANTES DE DESHABILITAR EL FORMULARIO
+        const formData = this.collectFormData();
+        const sanitizedData = window.contactValidator.sanitizeData(formData);
+
+        // Iniciar envío (deshabilitar elementos) — ahora después de recopilar los datos
         this.setSubmitState(true);
         
         try {
-            // Recopilar datos del formulario
-            const formData = this.collectFormData();
-            
-            // Sanitizar datos
-            const sanitizedData = window.contactValidator.sanitizeData(formData);
-            
             // Enviar a Django
             const response = await this.submitToBackend(sanitizedData);
             
@@ -115,31 +113,44 @@ class ContactFormHandler {
         data.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         
         // Agregar respuesta de reCAPTCHA si existe
-        if (typeof grecaptcha !== 'undefined') {
-            data.recaptcha_response = grecaptcha.getResponse();
-        }
+        // if (typeof grecaptcha !== 'undefined') {
+        //     data.recaptcha_response = grecaptcha.getResponse();
+        // }
         
         return data;
     }
 
     async submitToBackend(data) {
+        // Tomar token desde el input escondido o desde la cookie como fallback
+        const csrfInput = document.getElementById('csrfToken');
+        const cookieMatch = document.cookie.match(/csrftoken=([^;]+)/);
+        const csrfToken = (csrfInput && csrfInput.value) ? csrfInput.value : (cookieMatch ? cookieMatch[1] : '');
+
         const response = await fetch(this.apiEndpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': data.csrfmiddlewaretoken,
+                'X-CSRFToken': csrfToken,
                 'X-Requested-With': 'XMLHttpRequest',
             },
             credentials: 'same-origin',
             body: JSON.stringify(data)
         });
 
-        const result = await response.json();
-        
-        if (!response.ok) {
-            throw new Error(result.message || 'Error del servidor');
+        const resultText = await response.text();
+        let result;
+        try {
+            result = JSON.parse(resultText);
+        } catch (e) {
+            throw new Error('Server responded with non-JSON (possible CSRF error). Body starts with: ' + resultText.slice(0, 120));
         }
-        
+
+        // Antes se lanzaba error; ahora devolvemos el JSON para que handleSubmit procese errores
+        if (!response.ok) {
+            // devolver el objeto (ej: { success: false, errors: {...} })
+            return result;handleSubmit
+        }
+
         return result;
     }
 
@@ -148,9 +159,9 @@ class ContactFormHandler {
         this.form.reset();
         
         // Limpiar reCAPTCHA
-        if (typeof grecaptcha !== 'undefined') {
-            grecaptcha.reset();
-        }
+        // if (typeof grecaptcha !== 'undefined') {
+        //     grecaptcha.reset();
+        // }
         
         // Limpiar estados visuales
         this.clearFormStates();
@@ -246,6 +257,8 @@ class ContactFormHandler {
         });
     }
 
+    
+
     showMessage(type, title, message) {
         const modal = document.getElementById('messageModal');
         const modalTitle = document.getElementById('modalTitle');
@@ -303,26 +316,26 @@ window.closeModal = function() {
 };
 
 // Callback para reCAPTCHA
-window.onRecaptchaSuccess = function() {
-    if (window.contactValidator) {
-        window.contactValidator.clearRecaptchaError();
-    }
-};
+// window.onRecaptchaSuccess = function() {
+//     if (window.contactValidator) {
+//         window.contactValidator.clearRecaptchaError();
+//     }
+// };
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
     window.contactFormHandler = new ContactFormHandler();
 });
 
-// Manejar errores de reCAPTCHA
-window.onRecaptchaError = function() {
-    if (window.contactValidator) {
-        window.contactValidator.showRecaptchaError('Error en la verificación. Por favor, inténtalo de nuevo.');
-    }
-};
+// // Manejar errores de reCAPTCHA
+// window.onRecaptchaError = function() {
+//     if (window.contactValidator) {
+//         window.contactValidator.showRecaptchaError('Error en la verificación. Por favor, inténtalo de nuevo.');
+//     }
+// };
 
-window.onRecaptchaExpired = function() {
-    if (window.contactValidator) {
-        window.contactValidator.showRecaptchaError('La verificación ha expirado. Por favor, complétala nuevamente.');
-    }
-};
+// window.onRecaptchaExpired = function() {
+//     if (window.contactValidator) {
+//         window.contactValidator.showRecaptchaError('La verificación ha expirado. Por favor, complétala nuevamente.');
+//     }
+// };

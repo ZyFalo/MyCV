@@ -333,14 +333,14 @@ class ContactValidator {
         });
 
         // Validar reCAPTCHA
-        if (typeof grecaptcha !== 'undefined') {
-            const recaptchaResponse = grecaptcha.getResponse();
-            if (!recaptchaResponse) {
-                isFormValid = false;
-                errors.push('recaptcha');
-                this.showRecaptchaError('Please complete the reCAPTCHA verification');
-            }
-        }
+        // if (typeof grecaptcha !== 'undefined') {
+        //     const recaptchaResponse = grecaptcha.getResponse();
+        //     if (!recaptchaResponse) {
+        //         isFormValid = false;
+        //         errors.push('recaptcha');
+        //         this.showRecaptchaError('Please complete the reCAPTCHA verification');
+        //     }
+        // }
 
         return {
             isValid: isFormValid,
@@ -348,19 +348,19 @@ class ContactValidator {
         };
     }
 
-    showRecaptchaError(message) {
-        const errorElement = document.getElementById('recaptcha-error');
-        if (errorElement) {
-            errorElement.textContent = message;
-        }
-    }
+    // showRecaptchaError(message) {
+    //     const errorElement = document.getElementById('recaptcha-error');
+    //     if (errorElement) {
+    //         errorElement.textContent = message;
+    //     }
+    // }
 
-    clearRecaptchaError() {
-        const errorElement = document.getElementById('recaptcha-error');
-        if (errorElement) {
-            errorElement.textContent = '';
-        }
-    }
+    // clearRecaptchaError() {
+    //     const errorElement = document.getElementById('recaptcha-error');
+    //     if (errorElement) {
+    //         errorElement.textContent = '';
+    //     }
+    // }
 
     // Sanitización de datos
     sanitizeData(data) {

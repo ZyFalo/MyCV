@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'contact',
+    'fyqs'
 ]
 
 MIDDLEWARE = [
@@ -135,9 +137,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # collectstatic copia aquí; NO comitees esta carpeta
-# Antes: STATICFILES_DIRS apuntaba a toda la carpeta frontend. Es preferible apuntar solo a los assets estáticos
+
+# Directorios donde Django buscará archivos estáticos
 STATICFILES_DIRS = [
-    BASE_DIR.parent / 'frontend' / 'assets'  # solo css/js/images en frontend/assets/
+    BASE_DIR.parent / 'frontend',  # Carpeta frontend completa
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

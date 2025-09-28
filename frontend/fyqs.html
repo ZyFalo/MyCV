@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Frequently Asked Questions</title>
+    <meta name="description" content="Frequently asked questions about web development services and technology consulting.">
+    <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/png">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/fyqs.css' %}">
+
+    <script>
+        // STATIC_URL viene del context processor de Django
+        window.staticBase = "{{ STATIC_URL|default:'/static/' }}";
+    </script>
+</head>
+<body>
+    <!-- Video de fondo -->
+    <video class="video-background" autoplay muted loop preload="auto">
+        <source src="{% static 'assets/images/cosmic.mp4' %}" type="video/mp4">
+        <!-- Alternativa de imagen mientras carga el video -->
+        <img src="{% static 'assets/images/cosmic-static.jpeg' %}" alt="Cosmic background" class="background-image-placeholder">
+    </video>
+    <div class="video-overlay"></div>
+
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="{% static 'assets/images/icon.png' %}" alt="Cata's portfolio">
+                Cata
+            </a>
+        </div>
+        <nav aria-label="Main navigation">
+            <ul id="nav-list">
+                <li><a href="/#home">home</a></li>
+                <li><a href="/#about">about</a></li>
+                <li><a href="/#skills">skills</a></li>
+                <li><a href="/#achievements">achievements</a></li>
+                <li><a href="/#projects">projects</a></li>
+                <li><a href="/#comrades">comrades</a></li>
+                <li><a href="/FAQ/" class="active">FAQ</a></li>
+                <li><a href="/contactame.html">contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <a href="#" aria-label="Notion" title="Notion">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/notion.svg" alt="Notion">
+            </a>
+            <a href="https://github.com/CatalinaQuij" aria-label="GitHub" title="GitHub">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" alt="GitHub">
+            </a>
+            <a href="https://www.linkedin.com/in/catalina-alejandra-quijano-l%C3%B3pez-773733286/" aria-label="LinkedIn" title="LinkedIn">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn">
+            </a>
+            <button class="hamburguesa" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="faq-hero">
+            <div class="hero-container">
+                <h1 class="hero-title">Frequently <span class="highlight">Asked Questions</span></h1>
+                <p class="hero-description">
+                    Find answers to the most common questions about my work, experience, and services.
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="content-section faq-section">
+            <div class="section-wrapper">
+                <div class="section-content">
+                    <div class="faq-container">
+                        <div class="section-title">
+                            <span>FAQ</span>
+                            <div class="section-title-bar"></div>
+                        </div>
+                        
+                        <!-- Loading State -->
+                        <div id="faq-loading" class="loading-state">
+                            <div class="loading-spinner"></div>
+                            <p>Loading frequently asked questions...</p>
+                        </div>
+
+                        <!-- FAQ List -->
+                        <div id="faq-list" class="faq-list" style="display: none;">
+                            <!-- FAQs will be loaded dynamically here -->
+                        </div>
+
+                        <!-- Empty State -->
+                        <div id="faq-empty" class="empty-state" style="display: none;">
+                            <p>No frequently asked questions are available at this time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="{% static 'assets/js/menu.js' %}"></script>
+    <script src="{% static 'assets/js/fyqs.js' %}"></script>
+</body>
+</html>

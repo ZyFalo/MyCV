@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CvConfig(AppConfig):
+class ContactConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'CV'
+    name = 'contact'
