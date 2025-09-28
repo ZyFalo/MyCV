@@ -885,15 +885,33 @@ main {
     font-weight: 500;
 }
 
+.achievement-callout {
+    margin-top: 1em;
+    position: relative;
+}
+
 .achievement-details {
     font-size: 0.95em;
-    color: #9ca3af;
+    color: #d1d5db;
     line-height: 1.6;
     font-style: italic;
-    padding: 0.8em;
-    background: rgba(167, 139, 250, 0.05);
-    border-radius: 0.5em;
-    border-left: 3px solid #a78bfa;
+    padding: 1.2em 1.5em;
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(224, 170, 255, 0.05));
+    border-radius: 1em;
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    position: relative;
+    margin: 0;
+}
+
+.achievement-details::before {
+    content: '💭';
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    background: #2e1556;
+    padding: 0.2em 0.5em;
+    border-radius: 50%;
+    font-size: 1em;
 }
 
 .empty-state {
@@ -1259,5 +1277,194 @@ main {
     .tech-tag {
         font-size: 0.75em;
         padding: 0.25em 0.6em;
+    }
+}
+
+/* ===== COMRADES SECTION ===== */
+.comrades-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.comrades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2em;
+    margin-top: 2em;
+}
+
+.comrade-card {
+    background: rgba(46, 21, 86, 0.3);
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    border-radius: 1.5em;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.comrade-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(167, 139, 250, 0.2);
+    border-color: rgba(167, 139, 250, 0.4);
+}
+
+.comrade-banner {
+    background: linear-gradient(135deg, #a78bfa, #e0aaff);
+    padding: 2em 1.5em 1.5em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+    overflow: hidden;
+}
+
+.comrade-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+}
+
+.comrade-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.comrade-avatar {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 25px rgba(20, 12, 36, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.comrade-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.comrade-card:hover .comrade-avatar img {
+    transform: scale(1.1);
+}
+
+.comrade-info {
+    flex: 1;
+    z-index: 2;
+    position: relative;
+}
+
+.comrade-name {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #140c24;
+    margin-bottom: 0.3em;
+    line-height: 1.2;
+}
+
+.comrade-role {
+    font-size: 0.9em;
+    color: rgba(20, 12, 36, 0.8);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.3em 0.8em;
+    border-radius: 1em;
+    display: inline-block;
+}
+
+.comrade-content {
+    padding: 1.5em;
+}
+
+.comrade-description {
+    color: #d1d5db;
+    line-height: 1.6;
+    margin-bottom: 1.5em;
+    font-size: 0.95em;
+}
+
+.comrade-specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.specialty-tag {
+    background: rgba(167, 139, 250, 0.1);
+    color: #a78bfa;
+    padding: 0.4em 0.9em;
+    border-radius: 1.2em;
+    font-size: 0.8em;
+    font-weight: 500;
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    transition: all 0.3s ease;
+}
+
+.specialty-tag:hover {
+    background: rgba(167, 139, 250, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(167, 139, 250, 0.2);
+}
+
+/* Responsive para comrades */
+@media (max-width: 768px) {
+    .comrades-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5em;
+    }
+    
+    .comrade-card {
+        margin: 0 1em;
+    }
+    
+    .comrade-banner {
+        padding: 1.5em 1.2em 1.2em;
+        flex-direction: column;
+        text-align: center;
+        gap: 1em;
+    }
+    
+    .comrade-avatar {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .comrade-name {
+        font-size: 1.2em;
+    }
+    
+    .comrade-content {
+        padding: 1.2em;
+    }
+    
+    .specialty-tag {
+        font-size: 0.75em;
+        padding: 0.3em 0.7em;
     }
 }

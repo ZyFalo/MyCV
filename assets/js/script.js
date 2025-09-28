@@ -13,7 +13,7 @@ const achievementsData = {
         {
             title: "Basic Sciences Tutoring Program",
             period: "JAN 2024 - DEC 2024",
-            icon: "📚",
+            icon: "⌨️",
             description: "Provided comprehensive tutoring in basic sciences subjects to students across multiple university programs including Physiotherapy, Speech-Language Pathology, and Environmental Engineering.",
             details: "Throughout 2024, I had the privilege of supporting fellow students in mastering fundamental science concepts, adapting my teaching approach to diverse academic backgrounds and learning styles.",
             certificate: {
@@ -30,7 +30,7 @@ const achievementsData = {
             year: "2024",
             duration: "40 hours",
             type: "Online",
-            icon: "☁",
+            icon: "⌨️",
             description: "Comprehensive certification covering cloud computing fundamentals and Google Cloud Platform services, including compute, storage, networking, and security essentials."
         },
         {
@@ -39,7 +39,7 @@ const achievementsData = {
             year: "2024",
             duration: "20 hours",
             type: "Online",
-            icon: "🔒",
+            icon: "⌨️",
             description: "Foundational cybersecurity course covering threat landscape, attack vectors, security frameworks, and defense strategies for modern digital environments."
         },
         {
@@ -48,7 +48,7 @@ const achievementsData = {
             year: "2023",
             duration: "30 hours",
             type: "Online",
-            icon: "🐍",
+            icon: "⌨️",
             description: "Comprehensive Python programming fundamentals including syntax, data structures, control flow, functions, and object-oriented programming concepts."
         },
         {
@@ -57,7 +57,7 @@ const achievementsData = {
             year: "2024",
             duration: "40 hours",
             type: "Online",
-            icon: "🌐",
+            icon: "⌨️",
             description: "Advanced networking concepts covering switching technologies, VLAN configuration, routing protocols, wireless infrastructure, and network troubleshooting."
         },
         {
@@ -66,7 +66,7 @@ const achievementsData = {
             year: "2024",
             duration: "3 hours",
             type: "Online",
-            icon: "☁",
+            icon: "⌨️",
             description: "Azure cloud platform fundamentals including architecture overview, core services, security features, and pricing models for cloud solutions."
         }
     ]
@@ -129,6 +129,85 @@ const projectsData = [
         category: "Machine Learning"
     }
 ];
+
+// Configuración de datos para comrades (compañeros)
+const comradesData = [
+    {
+        name: "William Peña",
+        description: "An awesome full stack developer that have been working with me along this year (he secretly pretends working on backend and relational databases).",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+        role: "Full Stack Developer",
+        specialties: ["Backend", "Databases", "Full Stack"]
+    },
+    {
+        name: "Mariam Gutierrez",
+        description: "A quick learner and gamer, she is interested in data science and related projects, my dearest friend and colleague.",
+        image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
+        role: "Data Science Enthusiast",
+        specialties: ["Data Science", "Gaming", "Machine Learning"]
+    },
+    {
+        name: "Sebastián Araque",
+        description: "Web developer with a passion for creating innovative user experiences and modern web applications. Always up for a challenge and loves exploring new technologies.",
+        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
+        role: "Web Developer",
+        specialties: ["Frontend", "UI/UX", "Modern Web"]
+    }
+];
+
+// Clase para manejar la sección de comrades
+class ComradesManager {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        const comradesSection = document.getElementById('comrades');
+        if (comradesSection) {
+            this.createComradesSection();
+        }
+    }
+
+    createComradesSection() {
+        const comradesSection = document.getElementById('comrades');
+        const sectionWrapper = comradesSection.querySelector('.section-wrapper');
+        if (!sectionWrapper) return;
+
+        sectionWrapper.innerHTML = `
+            <h2 class="section-title">
+                <span style="font-size:1.2em; font-weight:bold;">/ my dear comrades! ❤️</span>
+                <span class="section-title-bar"></span>
+            </h2>
+            <div class="comrades-container">
+                <div class="comrades-grid">
+                    ${comradesData.map(comrade => this.createComradeCard(comrade)).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    createComradeCard(comrade) {
+        return `
+            <div class="comrade-card">
+                <div class="comrade-banner">
+                    <div class="comrade-avatar">
+                        <img src="${comrade.image}" alt="${comrade.name}" loading="lazy">
+                    </div>
+                    <div class="comrade-info">
+                        <h3 class="comrade-name">${comrade.name}</h3>
+                        <span class="comrade-role">${comrade.role}</span>
+                    </div>
+                </div>
+                <div class="comrade-content">
+                    <p class="comrade-description">${comrade.description}</p>
+                    <div class="comrade-specialties">
+                        ${comrade.specialties.map(specialty => `<span class="specialty-tag">${specialty}</span>`).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
 
 // Clase para manejar la sección de proyectos
 class ProjectsManager {
@@ -296,7 +375,7 @@ class AchievementsManager {
                 </div>
                 <div class="achievement-content">
                     <p class="achievement-description">${achievement.description}</p>
-                    ${achievement.details ? `<p class="achievement-details">${achievement.details}</p>` : ''}
+                    ${achievement.details ? `<div class="achievement-callout"><p class="achievement-details">${achievement.details}</p></div>` : ''}
                     ${achievement.certificate ? `
                         <div class="certificate-preview">
                             <button class="certificate-btn" onclick="previewCertificate('${achievement.certificate.url}', '${achievement.certificate.title}')">
@@ -779,6 +858,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.achievementsManager = new AchievementsManager();
     // Inicializar Projects Manager
     window.projectsManager = new ProjectsManager();
+    // Inicializar Comrades Manager
+    window.comradesManager = new ComradesManager();
 
     // Inicializar Menu Manager (usar fallback si menu.js no está disponible)
     if (typeof MenuManager === 'undefined') {
