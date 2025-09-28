@@ -101,7 +101,7 @@ else:
     }
 
 SECRET_KEY = os.environ.get('SECRET_KEY', SECRET_KEY)
-DEBUG = os.environ.get('DEBUG', 'True') == 'True' # Recordar cambiar a false después
+DEBUG = os.environ.get('DEBUG', 'False') == 'True' # Recordar cambiar a false después
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

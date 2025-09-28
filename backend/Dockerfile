@@ -1,19 +1,15 @@
-FROM python:3.11-slim
+FROM python:3.10-slim
+
 WORKDIR /app
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# copiar backend y frontend al contenedor (ajusta si el contexto difiere)
 COPY . .
-# si tu docker build se ejecuta desde backend/, copia frontend desde fuera:
-# COPY ../frontend ./frontend
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Collect static files
+RUN python manage.py collectstatic --noinput
 
-# collectstatic se puede ejecutar aquí o en entrypoint.sh
-RUN python manage.py collectstatic --noinput || true
+EXPOSE $PORT
 
-EXPOSE 8000
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "portfolio_cms.wsgi:application"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:$PORT"]
