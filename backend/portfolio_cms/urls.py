@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('contact.urls')),
     path('fyqs/', include('fyqs.urls')),
+    path('books/', include('books.urls')),
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
     path('FAQ/', TemplateView.as_view(template_name='fyqs.html'), name='faq'),
     path('contactame.html', TemplateView.as_view(template_name='contactame.html'), name='contactame'),

@@ -1,0 +1,327 @@
+/* ===== BOOK DETAIL STYLES ===== */
+
+/* Breadcrumb */
+.breadcrumb {
+    padding: 2em 2em 0 2em;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.breadcrumb a {
+    color: #e0aaff;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.breadcrumb a:hover {
+    color: #a78bfa;
+}
+
+/* Book Detail Section */
+.book-detail-section {
+    background: #2e1556;
+    min-height: 80vh;
+    padding: 2em 0 4em 0;
+    position: relative;
+    z-index: 1;
+}
+
+.book-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
+.book-detail-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4em;
+    align-items: start;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2em;
+    padding: 3em;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Book Detail Image */
+.book-detail-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.detail-image {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 1em;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.detail-image:hover {
+    transform: scale(1.02);
+}
+
+.book-detail-image .featured-badge {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    background: linear-gradient(135deg, #a78bfa, #e0aaff);
+    color: #140c24;
+    padding: 0.5em 1em;
+    border-radius: 1.5em;
+    font-size: 0.9em;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(167, 139, 250, 0.3);
+}
+
+/* Book Detail Info */
+.book-detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.book-detail-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin: 0;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.book-detail-author {
+    font-size: 1.4em;
+    color: #e0aaff;
+    font-weight: 500;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Book Detail Meta */
+.book-detail-meta {
+    display: flex;
+    gap: 2em;
+    flex-wrap: wrap;
+    padding: 1.5em 0;
+    border-top: 1px solid rgba(167, 139, 250, 0.2);
+    border-bottom: 1px solid rgba(167, 139, 250, 0.2);
+}
+
+.book-detail-meta > div {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 1.1em;
+}
+
+.book-rating {
+    color: #ffd700;
+    font-weight: 600;
+}
+
+.book-year, .book-pages {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Book Detail Content Sections */
+.book-detail-summary,
+.book-detail-description,
+.book-detail-keywords {
+    margin-bottom: 2em;
+}
+
+.book-detail-summary h3,
+.book-detail-description h3,
+.book-detail-keywords h3 {
+    font-size: 1.3em;
+    color: #a78bfa;
+    margin-bottom: 1em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.book-detail-summary h3::before {
+    content: "📄";
+}
+
+.book-detail-description h3::before {
+    content: "📚";
+}
+
+.book-detail-keywords h3::before {
+    content: "🏷️";
+}
+
+.book-detail-summary p,
+.book-detail-description p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: justify;
+}
+
+.book-detail-description p {
+    font-size: 1.05em;
+    line-height: 1.7;
+}
+
+/* Keywords List */
+.keywords-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8em;
+}
+
+.book-detail-keywords .keyword-tag {
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.3), rgba(224, 170, 255, 0.3));
+    color: #e0aaff;
+    padding: 0.5em 1.2em;
+    border-radius: 1.5em;
+    font-size: 0.9em;
+    font-weight: 500;
+    border: 1px solid rgba(167, 139, 250, 0.4);
+    transition: all 0.3s ease;
+}
+
+.book-detail-keywords .keyword-tag:hover {
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.5), rgba(224, 170, 255, 0.5));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(167, 139, 250, 0.2);
+}
+
+/* Book Detail Actions */
+.book-detail-actions {
+    margin-top: 3em;
+    padding-top: 2em;
+    border-top: 1px solid rgba(167, 139, 250, 0.2);
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8em;
+    background: linear-gradient(135deg, #a78bfa, #e0aaff);
+    color: #140c24;
+    padding: 1em 2em;
+    border-radius: 1em;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(167, 139, 250, 0.3);
+}
+
+.back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(167, 139, 250, 0.4);
+    filter: brightness(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .book-detail-content {
+        grid-template-columns: 1fr;
+        gap: 3em;
+        padding: 2.5em;
+    }
+    
+    .book-detail-image {
+        order: -1;
+        justify-content: center;
+    }
+    
+    .detail-image {
+        max-width: 280px;
+        max-height: 400px;
+    }
+    
+    .book-detail-title {
+        font-size: 2.2em;
+        text-align: center;
+    }
+    
+    .book-detail-author {
+        font-size: 1.2em;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .breadcrumb {
+        padding: 1.5em 1em 0 1em;
+    }
+    
+    .book-detail-container {
+        padding: 0 1em;
+    }
+    
+    .book-detail-content {
+        padding: 2em;
+        gap: 2em;
+    }
+    
+    .book-detail-title {
+        font-size: 1.8em;
+    }
+    
+    .book-detail-author {
+        font-size: 1.1em;
+    }
+    
+    .book-detail-meta {
+        gap: 1em;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .book-detail-meta > div {
+        font-size: 1em;
+    }
+    
+    .detail-image {
+        max-width: 240px;
+        max-height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .book-detail-content {
+        padding: 1.5em;
+        gap: 1.5em;
+    }
+    
+    .book-detail-title {
+        font-size: 1.6em;
+    }
+    
+    .book-detail-summary p,
+    .book-detail-description p {
+        font-size: 1em;
+        line-height: 1.6;
+        text-align: left;
+    }
+    
+    .keywords-list {
+        gap: 0.5em;
+    }
+    
+    .book-detail-keywords .keyword-tag {
+        padding: 0.4em 1em;
+        font-size: 0.85em;
+    }
+}

@@ -1,11 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - Frequently Asked Questions</title>
-    <meta name="description" content="Frequently asked questions about web development services and technology consulting.">
+    <title>{{ book.title }} - Book Details</title>
+    <meta name="description" content="{{ book.summary }}">
     <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/png">
     
     <!-- Google Fonts -->
@@ -14,18 +14,13 @@
     
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/fyqs.css' %}">
-
-    <script>
-        // STATIC_URL viene del context processor de Django
-        window.staticBase = "{{ STATIC_URL|default:'/static/' }}";
-    </script>
+    <link rel="stylesheet" href="{% static 'assets/css/books.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/book-detail.css' %}">
 </head>
 <body>
     <!-- Video de fondo -->
     <video class="video-background" autoplay muted loop preload="auto">
         <source src="{% static 'assets/images/cosmic.mp4' %}" type="video/mp4">
-        <!-- Alternativa de imagen mientras carga el video -->
         <img src="{% static 'assets/images/cosmic-static.jpeg' %}" alt="Cosmic background" class="background-image-placeholder">
     </video>
     <div class="video-overlay"></div>
@@ -45,8 +40,8 @@
                 <li><a href="/#achievements">achievements</a></li>
                 <li><a href="/#projects">projects</a></li>
                 <li><a href="/#comrades">comrades</a></li>
-                <li><a href="/FAQ/" class="active">FAQ</a></li>
-                <li><a href="/books/">books</a></li>
+                <li><a href="/FAQ/">FAQ</a></li>
+                <li><a href="/books/" class="active">books</a></li>
                 <li><a href="/contactame.html">contact</a></li>
             </ul>
         </nav>
@@ -68,42 +63,57 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
-        <section class="faq-hero">
-            <div class="hero-container">
-                <h1 class="hero-title">Frequently <span class="highlight">Asked Questions</span></h1>
-                <p class="hero-description">
-                    Find answers to the most common questions about my work, experience, and services.
-                </p>
-            </div>
-        </section>
 
-        <!-- FAQ Section -->
-        <section class="content-section faq-section">
-            <div class="section-wrapper">
-                <div class="section-content">
-                    <div class="faq-container">
-                        <div class="section-title">
-                            <span>FAQ</span>
-                            <div class="section-title-bar"></div>
-                        </div>
+        <!-- Book Detail Section -->
+        <section class="book-detail-section">
+            <div class="book-detail-container">
+                <div class="book-detail-content">
+                    <div class="book-detail-image">
+                        <img src="{{ book.image_url }}" alt="{{ book.title }}" class="detail-image">
+                        {% if book.featured %}
+                            <div class="featured-badge">Featured</div>
+                        {% endif %}
+                    </div>
+                    <div class="book-detail-info">
+                        <h1 class="book-detail-title">{{ book.title }}</h1>
+                        <h2 class="book-detail-author">by {{ book.author }}</h2>
                         
-                        <!-- Loading State -->
-                        <div id="faq-loading" class="loading-state">
-                            <div class="loading-spinner"></div>
-                            <p>Loading frequently asked questions...</p>
+                        <div class="book-detail-meta">
+                            {% if book.rating %}
+                                <div class="book-rating">{{ book.get_rating_stars }} ({{ book.rating }}/5)</div>
+                            {% endif %}
+                            {% if book.publication_year %}
+                                <div class="book-year">Published: {{ book.publication_year }}</div>
+                            {% endif %}
+                            {% if book.pages %}
+                                <div class="book-pages">{{ book.pages }} pages</div>
+                            {% endif %}
                         </div>
 
-                        <!-- FAQ List -->
-                        <div id="faq-list" class="faq-list" style="display: none;">
-                            <!-- FAQs will be loaded dynamically here -->
+                        <div class="book-detail-summary">
+                            <h3>Summary</h3>
+                            <p>{{ book.summary }}</p>
                         </div>
 
-                        <!-- Empty State -->
-                        <div id="faq-empty" class="empty-state" style="display: none;">
-                            <p>No frequently asked questions are available at this time.</p>
+                        <div class="book-detail-description">
+                            <h3>Description</h3>
+                            <p>{{ book.description|linebreaks }}</p>
+                        </div>
+
+                        {% if book.get_keywords_list %}
+                            <div class="book-detail-keywords">
+                                <h3>Keywords</h3>
+                                <div class="keywords-list">
+                                    {% for keyword in book.get_keywords_list %}
+                                        <span class="keyword-tag">{{ keyword }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <div class="book-detail-actions">
+                            <a href="/books/" class="back-btn">← Back to Collection</a>
                         </div>
                     </div>
                 </div>
@@ -113,6 +123,5 @@
 
     <!-- JavaScript -->
     <script src="{% static 'assets/js/menu.js' %}"></script>
-    <script src="{% static 'assets/js/fyqs.js' %}"></script>
 </body>
 </html>

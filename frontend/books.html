@@ -1,11 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - Frequently Asked Questions</title>
-    <meta name="description" content="Frequently asked questions about web development services and technology consulting.">
+    <title>Books - Reading Collection</title>
+    <meta name="description" content="Personal book collection and reading recommendations.">
     <link rel="icon" href="{% static 'assets/images/favicon.png' %}" type="image/png">
     
     <!-- Google Fonts -->
@@ -14,7 +14,7 @@
     
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/fyqs.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/books.css' %}">
 
     <script>
         // STATIC_URL viene del context processor de Django
@@ -45,8 +45,8 @@
                 <li><a href="/#achievements">achievements</a></li>
                 <li><a href="/#projects">projects</a></li>
                 <li><a href="/#comrades">comrades</a></li>
-                <li><a href="/FAQ/" class="active">FAQ</a></li>
-                <li><a href="/books/">books</a></li>
+                <li><a href="/FAQ/">FAQ</a></li>
+                <li><a href="/books/" class="active">books</a></li>
                 <li><a href="/contactame.html">contact</a></li>
             </ul>
         </nav>
@@ -71,39 +71,39 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="faq-hero">
+        <section class="books-hero">
             <div class="hero-container">
-                <h1 class="hero-title">Frequently <span class="highlight">Asked Questions</span></h1>
+                <h1 class="hero-title">My <span class="highlight">Reading</span> Collection</h1>
                 <p class="hero-description">
-                    Find answers to the most common questions about my work, experience, and services.
+                    Discover the books that have shaped my thinking and inspired my journey as a developer and learner.
                 </p>
             </div>
         </section>
 
-        <!-- FAQ Section -->
-        <section class="content-section faq-section">
+        <!-- Books Section -->
+        <section class="content-section books-section">
             <div class="section-wrapper">
                 <div class="section-content">
-                    <div class="faq-container">
+                    <div class="books-container">
                         <div class="section-title">
-                            <span>FAQ</span>
+                            <span>📚 BOOKS</span>
                             <div class="section-title-bar"></div>
                         </div>
                         
                         <!-- Loading State -->
-                        <div id="faq-loading" class="loading-state">
+                        <div id="books-loading" class="loading-state">
                             <div class="loading-spinner"></div>
-                            <p>Loading frequently asked questions...</p>
+                            <p>Loading book collection...</p>
                         </div>
 
-                        <!-- FAQ List -->
-                        <div id="faq-list" class="faq-list" style="display: none;">
-                            <!-- FAQs will be loaded dynamically here -->
+                        <!-- Books Grid -->
+                        <div id="books-grid" class="books-grid" style="display: none;">
+                            <!-- Los libros se cargarán dinámicamente aquí -->
                         </div>
 
                         <!-- Empty State -->
-                        <div id="faq-empty" class="empty-state" style="display: none;">
-                            <p>No frequently asked questions are available at this time.</p>
+                        <div id="books-empty" class="empty-state" style="display: none;">
+                            <p>No books are available at this time.</p>
                         </div>
                     </div>
                 </div>
@@ -113,6 +113,6 @@
 
     <!-- JavaScript -->
     <script src="{% static 'assets/js/menu.js' %}"></script>
-    <script src="{% static 'assets/js/fyqs.js' %}"></script>
+    <script src="{% static 'assets/js/books.js' %}"></script>
 </body>
 </html>
