@@ -148,7 +148,7 @@ const comradesData = [
         image: "assets/images/comrades/mar.jpg",
         role: "Data Science",
         specialties: ["Data Science", "Gaming", "ML"],
-        website: "https://www.hoyoverse.com/es-es/"
+        website: "https://pratica2-sooty.vercel.app/?utm_source=cata&utm_medium=banner&utm_campaign=portafolio&utm_content=perfil"
     },
     {
         name: "Sebastián Araque",
