@@ -140,7 +140,7 @@ const comradesData = [
         image: "assets/images/comrades/will.jpg",
         role: "Full Stack Dev",
         specialties: ["Backend", "Databases", "Full Stack"],
-        website: "https://dev-william-pena.up.railway.app/"
+        website: "https://dev-william-pena.up.railway.app/?utm_source=cata&utm_medium=banner&utm_campaign=portafolio&utm_id=portafolio&utm_content=perfil"
     },
     {
         name: "Mariam Gutiérrez",
@@ -148,7 +148,7 @@ const comradesData = [
         image: "assets/images/comrades/mar.jpg",
         role: "Data Science",
         specialties: ["Data Science", "Gaming", "ML"],
-        website: "https://mariamgutierrez.dev"
+        website: "https://www.hoyoverse.com/es-es/"
     },
     {
         name: "Sebastián Araque",
@@ -156,7 +156,7 @@ const comradesData = [
         image: "assets/images/comrades/araque.jpeg",
         role: "Web Developer",
         specialties: ["Frontend", "UI/UX", "Modern Web"],
-        website: "https://araque08.com/"
+        website: "https://araque08.com/?utm_source=cata&utm_medium=banner&utm_campaign=portafolio&utm_id=portafolio&utm_content=perfil"
     }
 ];
 
