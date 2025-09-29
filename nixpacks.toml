@@ -1,2 +1,5 @@
+[phases.setup]
+nixPkgs = ["python3", "gcc", "pkg-config", "mysql80", "libmysqlclient"]
+
 [start]
 cmd = "bash start.sh"
