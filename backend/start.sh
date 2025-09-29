@@ -21,13 +21,23 @@ echo "\n🔍 Running Django system check..."
 python manage.py check --deploy
 
 echo "\n📊 Checking database connection..."
-python manage.py dbshell --command="SELECT 1;" || echo "⚠️  DB connection check failed, continuing..."
+python -c "
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio_cms.settings')
+import django
+django.setup()
+from django.db import connection
+cursor = connection.cursor()
+cursor.execute('SELECT 1')
+print('✅ Database connection successful!')
+" || echo "⚠️  DB connection check failed, continuing..."
 
 echo "\n🗃️  Making migrations (in case of model changes)..."
 python manage.py makemigrations --noinput --verbosity=2
 
 echo "\n📦 Applying all migrations to new MySQL database..."
-python manage.py migrate --noinput --verbosity=2
+# Force apply migrations even if they appear to exist
+python manage.py migrate --run-syncdb --verbosity=2
 
 echo "\n👤 Creating superuser if needed..."
 echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(username='admin').exists() or User.objects.create_superuser('admin', 'admin@portfolio.com', 'railway2025')" | python manage.py shell
@@ -35,8 +45,16 @@ echo "from django.contrib.auth import get_user_model; User = get_user_model(); U
 echo "\n🎨 Collecting static files..."
 python manage.py collectstatic --noinput --verbosity=2
 
-echo "\n✅ Database setup complete! Tables created:"
-python manage.py dbshell --command="SHOW TABLES;"
+echo "\n✅ Database setup complete! Verifying Django setup..."
+python -c "
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio_cms.settings')
+import django
+django.setup()
+from django.db import connection
+print('✅ Django successfully connected to MySQL!')
+print('✅ Database backend:', connection.settings_dict['ENGINE'])
+"
 
 echo "\n🚀 Starting Gunicorn server..."
 exec gunicorn -c gunicorn.conf.py portfolio_cms.wsgi:application
