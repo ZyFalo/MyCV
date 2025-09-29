@@ -31,8 +31,4 @@ class FAQAdmin(admin.ModelAdmin):
         """Optimiza las consultas"""
         return super().get_queryset(request).order_by('order', '-created_at')
     
-    class Media:
-        css = {
-            'all': ('admin/css/faq_admin.css',)
-        }
-        js = ('admin/js/faq_admin.js',)
+    # Removed custom CSS/JS that don't exist

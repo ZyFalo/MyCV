@@ -35,34 +35,37 @@ class BookAdmin(admin.ModelAdmin):
     
     def title_display(self, obj):
         """Display title with image preview"""
+        # Safely handle summary text
+        summary_text = obj.summary or ""
+        summary_preview = summary_text[:50] + '...' if len(summary_text) > 50 else summary_text
+        
         if obj.image_url:
             return format_html(
                 '<div style="display: flex; align-items: center;">'
-                '<img src="{}" style="width: 40px; height: 60px; object-fit: cover; margin-right: 10px; border-radius: 4px;">'
+                '<img src="{}" style="width: 40px; height: 60px; object-fit: cover; margin-right: 10px; border-radius: 4px;" onerror="this.style.display=\'none\'">'
                 '<div><strong>{}</strong><br><small>{}</small></div>'
                 '</div>',
-                obj.image_url, obj.title, obj.summary[:50] + '...' if len(obj.summary) > 50 else obj.summary
+                obj.image_url, 
+                obj.title, 
+                summary_preview
             )
         return format_html('<strong>{}</strong><br><small>{}</small>', 
-                          obj.title, obj.summary[:50] + '...' if len(obj.summary) > 50 else obj.summary)
+                          obj.title, 
+                          summary_preview)
     title_display.short_description = 'Book'
     
     def image_preview(self, obj):
         """Show image preview in the admin form"""
         if obj.image_url:
             return format_html(
-                '<img src="{}" style="max-width: 200px; max-height: 300px; object-fit: contain; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">',
+                '<img src="{}" style="max-width: 200px; max-height: 300px; object-fit: contain; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" onerror="this.alt=\'Image not available\'; this.style.display=\'none\';">',
                 obj.image_url
             )
-        return "No image provided"
+        return format_html('<span style="color: #666; font-style: italic;">No image provided</span>')
     image_preview.short_description = 'Image Preview'
     
     def get_queryset(self, request):
         """Optimize queries"""
         return super().get_queryset(request).order_by('order', '-created_at')
     
-    class Media:
-        css = {
-            'all': ('admin/css/book_admin.css',)
-        }
-        js = ('admin/js/book_admin.js',)
+    # Removed custom CSS/JS that may not exist
