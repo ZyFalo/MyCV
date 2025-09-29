@@ -1,0 +1,2 @@
+# Railway requirements - redirects to backend
+-r backend/requirements.txt
